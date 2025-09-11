@@ -1,6 +1,6 @@
-# Florafy 🌱
+# Verdant 🌱
 
-Florafy is a Django web application that allows users to manage and care for virtual plants. Each plant grows over time, but requires attention from the user. Neglected plants may wilt or regress in growth. The app encourages daily interaction and gamifies plant care with growth stages, health tracking, and achievements.
+Verdant is a Django web application that allows users to manage and care for virtual plants. Each plant grows over time, but requires attention from the user. Neglected plants may wilt or regress in growth. The app encourages daily interaction and gamifies plant care with growth stages, health tracking, and achievements.
 
 ---
 
@@ -87,7 +87,7 @@ Florafy is a Django web application that allows users to manage and care for vir
 - Current Structure
 ```
 my_app/
-florafy/
+Verdant/
  ┣ my_app/
  ┃ ┣ static/
  ┃ ┃ ┗ css/
@@ -135,7 +135,7 @@ florafy/
 ```
 ---
 ## Models and ERD
-Florafy has the following main models:
+Verdant has the following main models:
 
 1. **User** (built-in Django auth user)  
    - Fields: username, email, password, etc.  
@@ -203,7 +203,7 @@ User 1 ────< Plant >─────< Accessory
 
 ## Conclusion
 
-Florafy is designed to combine productivity, education, and fun by allowing users to nurture virtual plants while learning about plant care. With a robust CRUD system, a growth and neglect simulation, and gamification elements such as achievements and badges, Florafy encourages daily interaction and engagement. Its modular Django architecture, clean project structure, and scalable backend make it easy to extend and maintain. Whether used as a personal gardening companion or a learning tool, Florafy provides an engaging and rewarding experience for all plant enthusiasts.
+Verdant is designed to combine productivity, education, and fun by allowing users to nurture virtual plants while learning about plant care. With a robust CRUD system, a growth and neglect simulation, and gamification elements such as achievements and badges, Verdant encourages daily interaction and engagement. Its modular Django architecture, clean project structure, and scalable backend make it easy to extend and maintain. Whether used as a personal gardening companion or a learning tool, Verdant provides an engaging and rewarding experience for all plant enthusiasts.
 
 
 Thanks for checking out this project!
