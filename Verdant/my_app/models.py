@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Accessories that can be attached to plants
 class Accessory(models.Model):
     ACCESSORY_TYPES = [

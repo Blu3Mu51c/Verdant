@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>My Plants</h1>
+
+  <a href="{% url 'plant-create' %}">+ Add a New Plant</a>
+
+  {% if plants %}
+    <ul>
+      {% for plant in plants %}
+        <li>
+          <a href="{% url 'plant-detail' plant.id %}">
+            {{ plant.name }} ({{ plant.species }})
+          </a> - Growth: {{ plant.get_growth_stage_display }} | Health: {{ plant.health }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>You don’t have any plants yet. Add one!</p>
+  {% endif %}
+{% endblock %}
