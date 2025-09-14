@@ -2,46 +2,62 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/leaf-icon.png' %}" />
-    <title>Verdant 🌱</title>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {% block head %}{% endblock %}
-  </head>
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/form.css' %}">
 
-  <body>
-    <header>
-      <div class="header-logo-container">
-        <a href="/"><img src="{% static 'images/header-logo-plant.png' %}" alt="Verdant Logo" /></a>
-      </div>
-      <nav>
-        <ul>
-          {% if user.is_authenticated %}
-            <li><a href="{% url 'plant-list' %}">🌿 My Plants</a></li>
-            <li><a href="{% url 'plant-create' %}">➕ Add Plant</a></li>
-            <li><a href="{% url 'accessory-list' %}">🪴 Accessories</a></li>
-            <li><a href="{% url 'about' %}">ℹ️ About</a></li>
-            <li>
-              <form id="logout-form" method="post" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <button type="submit">Log out</button>
-              </form>
-            </li>
-          {% else %}
-            <li><a href="{% url 'about' %}">ℹ️ About</a></li>
-            <li><a href="{% url 'home' %}">Login</a></li>
-            <li><a href="{% url 'signup' %}">Sign Up</a></li>
-          {% endif %}
-        </ul>
-      </nav>
-    </header>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="{% static 'images/leaf-icon.png' %}">
 
-    <main>
-      {% block content %}{% endblock %}
-    </main>
-  </body>
+  <title>Verdant 🌱</title>
+
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <!-- Header / Navbar -->
+  <header>
+    <div class="header-logo-container">
+      <a href="{% url 'home' %}">
+        <img src="{% static 'images/header-logo-plant.png' %}" alt="Verdant Logo">
+      </a>
+    </div>
+
+    <nav>
+      <ul class="nav-links">
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'plant-list' %}">My Plants</a></li>
+          <li><a href="{% url 'plant-create' %}">Add Plant</a></li>
+          <li><a href="{% url 'accessory-list' %}">Accessories</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li>
+            <form id="logout-form" method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit" class="btn-logout">Log out</button>
+            </form>
+          </li>
+        {% else %}
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'home' %}">Login</a></li>
+          <li><a href="{% url 'signup' %}">Sign Up</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main content -->
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Verdant. All rights reserved.</p>
+  </footer>
+
+</body>
 </html>

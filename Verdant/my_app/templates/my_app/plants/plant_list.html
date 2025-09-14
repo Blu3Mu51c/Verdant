@@ -1,20 +1,38 @@
 {% extends 'base.html' %}
-{% block content %}
-  <h1>My Plants</h1>
 
-  <a href="{% url 'plant-create' %}">+ Add a New Plant</a>
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/plants/plant-list.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <h1 class="plants-title">My Plants</h1>
+
+  <a href="{% url 'plant-create' %}" class="add-plant-btn">+ Add a New Plant</a>
 
   {% if plants %}
-    <ul>
+    <ul class="plants-container">
       {% for plant in plants %}
-        <li>
-          <a href="{% url 'plant-detail' plant.id %}">
-            {{ plant.name }} ({{ plant.species }})
-          </a> - Growth: {{ plant.get_growth_stage_display }} | Health: {{ plant.health }}
+        <li class="plant-card">
+          <div class="plant-img-container">
+            {% if plant.growth_stage == 'seedling' %}
+              <img src="{% static 'images/plants/seedling.png' %}" alt="{{ plant.name }} - Seedling" />
+            {% elif plant.growth_stage == 'juvenile' %}
+              <img src="{% static 'images/plants/juvenile.png' %}" alt="{{ plant.name }} - Juvenile" />
+            {% elif plant.growth_stage == 'mature' %}
+              <img src="{% static 'images/plants/mature.png' %}" alt="{{ plant.name }} - Mature" />
+            {% elif plant.growth_stage == 'flowering' %}
+              <img src="{% static 'images/plants/flowering.png' %}" alt="{{ plant.name }} - Flowering" />
+            {% endif %}
+          </div>
+
+          <a href="{% url 'plant-detail' plant.id %}" class="plant-name">{{ plant.name }} ({{ plant.species }})</a>
+          <p class="plant-info">Growth: {{ plant.get_growth_stage_display }} | Health: {{ plant.health }}</p>
         </li>
       {% endfor %}
     </ul>
   {% else %}
-    <p>You don’t have any plants yet. Add one!</p>
+    <p class="no-plants-msg">You don’t have any plants yet. Add one!</p>
   {% endif %}
 {% endblock %}

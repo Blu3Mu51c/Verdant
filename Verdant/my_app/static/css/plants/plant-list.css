@@ -1,0 +1,94 @@
+/* Title styling */
+.plants-title {
+  font-size: 2rem;
+  text-align: center;
+  color: #2e7d32;
+  margin-top: 2rem;
+}
+
+/* Add plant button */
+.add-plant-btn {
+  display: inline-block;
+  margin: 1rem 0;
+  padding: 0.6rem 1.2rem;
+  background: #43a047;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.add-plant-btn:hover {
+  background: #388e3c;
+}
+
+/* Container for plant cards */
+.plants-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 0;
+  list-style: none;
+  margin-top: 2rem;
+}
+
+/* Individual plant card */
+.plant-card {
+  background: #f1f8f1; /* light green */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  flex: 1 1 250px; /* responsive width */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.plant-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Plant name */
+.plant-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2e7d32;
+  text-decoration: none;
+}
+
+.plant-name:hover {
+  text-decoration: underline;
+  color: #43a047;
+}
+
+/* Plant info (growth stage + health) */
+.plant-info {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #1b5e20;
+}
+
+/* No plants message */
+.no-plants-msg {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  color: #1b5e20;
+}
+
+.plant-img-container {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.plant-img-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.plant-img-container img:hover {
+  transform: scale(1.05);
+}

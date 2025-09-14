@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/careactions/careaction-list.css' %}">
+{% endblock %}
 {% block content %}
 <h1>Care History</h1>
 

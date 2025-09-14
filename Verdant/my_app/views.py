@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.urls import reverse
+from django.utils import timezone
 
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
@@ -118,12 +119,9 @@ class AccessoryDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "my_app/accessories/accessory_confirm_delete.html"
     success_url = reverse_lazy("accessory-list")
 
-
-
 # --------------------------
 # CareAction Views
 # --------------------------
-
 
 class CareActionCreateView(LoginRequiredMixin, CreateView):
     model = CareAction
@@ -131,8 +129,24 @@ class CareActionCreateView(LoginRequiredMixin, CreateView):
     form_class = CareActionForm
 
     def form_valid(self, form):
+        # Link the action to the correct plant
         plant = Plant.objects.get(pk=self.kwargs['pk'])
         form.instance.plant = plant
+
+        # Update plant health based on action type
+        if form.instance.action_type == 'water':
+            plant.health = min(100, plant.health + 10)
+        elif form.instance.action_type == 'fertilize':
+            plant.health = min(100, plant.health + 15)
+        elif form.instance.action_type == 'prune':
+            plant.health = min(100, plant.health + 5)
+        elif form.instance.action_type == 'sunlight':
+            plant.health = min(100, plant.health + 5)
+
+        # Reset last cared for timestamp
+        plant.last_cared_for = timezone.now()
+        plant.save()
+
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -142,6 +156,8 @@ class CareActionCreateView(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['plant_id'] = self.kwargs['pk']
         return context
+
+
 
 
 class CareActionListView(LoginRequiredMixin, ListView):

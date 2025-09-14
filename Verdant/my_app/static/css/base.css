@@ -1,0 +1,65 @@
+/* Option 2: Vibrant & Modern */
+html {
+  font-size: 18px;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #e8f5e9; /* light mint green */
+  color: #1b5e20; /* dark green */
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #43a047; /* medium green */
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+header nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1.2rem;
+}
+
+header nav ul li a, header nav button {
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: 0.2s;
+}
+
+header nav ul li a:hover, header nav button:hover {
+  color: #c8e6c9;
+}
+
+main {
+  padding: 2rem;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #2e7d32;
+}
+
+h2 {
+  font-size: 2.2rem;
+}
+
+button {
+  background: #66bb6a;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1.1rem;
+  border: none;
+}
+
+button:hover {
+  background: #388e3c;
+}
