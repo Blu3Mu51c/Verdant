@@ -20,4 +20,6 @@ urlpatterns = [
     path("accessories/<int:pk>/update/", views.AccessoryUpdateView.as_view(), name="accessory-update"),
     path("accessories/<int:pk>/delete/", views.AccessoryDeleteView.as_view(), name="accessory-delete"),
 
+    path('plants/<int:pk>/care/', views.CareActionListView.as_view(), name='careaction-list'),
+    path('plants/<int:pk>/care/add/', views.CareActionCreateView.as_view(), name='careaction-add'),
 ]

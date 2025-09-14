@@ -2,8 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 
-
-# Accessories that can be attached to plants
+# Accessory model
 class Accessory(models.Model):
     ACCESSORY_TYPES = [
         ('pot', 'Pot'),
@@ -23,7 +22,7 @@ class Accessory(models.Model):
     def get_absolute_url(self):
         return reverse("accessory-detail", kwargs={"pk": self.id})
 
-
+# Plant model
 class Plant(models.Model):
     GROWTH_STAGES = [
         ('seedling', 'Seedling'),
@@ -49,7 +48,7 @@ class Plant(models.Model):
         return reverse("plant-detail", kwargs={"pk": self.id})
 
 
-# Tracks user interactions with plants
+# CareAction model
 class CareAction(models.Model):
     ACTION_TYPES = [
         ('water', 'Watering'),

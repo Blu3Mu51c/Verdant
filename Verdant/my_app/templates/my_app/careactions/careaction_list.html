@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Care History</h1>
+
+{% if care_actions %}
+  <ul>
+    {% for action in care_actions %}
+      <li>{{ action.get_action_type_display }} on {{ action.date|date:"Y-m-d H:i" }}{% if action.notes %} - Notes: {{ action.notes }}{% endif %}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No care actions logged yet.</p>
+{% endif %}
+<a href="{% url 'plant-detail' plant_id %}">Back to Plant</a>
+{% endblock %}

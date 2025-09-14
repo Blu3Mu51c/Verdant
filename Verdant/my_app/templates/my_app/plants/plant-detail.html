@@ -17,9 +17,16 @@
     </ul>
   {% else %}
     <p>No accessories added yet.</p>
-  {% endif %}
-
-  <a href="{% url 'plant-update' object.id %}">✏️ Edit</a> |
-  <a href="{% url 'plant-delete' object.id %}">🗑️ Delete</a> |
+  {% endif %} 
+  </br>
+  </br>
+  <a href="{% url 'careaction-add' object.id %}">+ Add Care Action</a>
+  <a href="{% url 'careaction-list' object.id %}">View Care History</a>
+  </br>
+  </br>
+  </br>
+  </br>
+  <a href="{% url 'plant-update' object.id %}">Edit</a> |
+  <a href="{% url 'plant-delete' object.id %}">Delete</a> |
   <a href="{% url 'plant-list' %}">Back to My Plants</a>
 {% endblock %}
