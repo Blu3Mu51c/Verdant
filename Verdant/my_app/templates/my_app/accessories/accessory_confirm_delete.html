@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="accessory-delete">
+  <h1>Delete Accessory</h1>
+  <p>Are you sure you want to delete <strong>{{ accessory.name }}</strong>?</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn danger">Yes, delete</button>
+    <a href="{% url 'accessory-detail' accessory.id %}" class="btn">Cancel</a>
+  </form>
+</section>
+{% endblock %}

@@ -8,7 +8,18 @@
   <p>Planted on: {{ object.planting_date }}</p>
   <p>Last cared for: {{ object.last_cared_for }}</p>
 
+  <h3>Accessories</h3>
+  {% if object.accessories.all %}
+    <ul>
+      {% for accessory in object.accessories.all %}
+        <li>{{ accessory.name }} ({{ accessory.get_type_display }})</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No accessories added yet.</p>
+  {% endif %}
+
   <a href="{% url 'plant-update' object.id %}">✏️ Edit</a> |
   <a href="{% url 'plant-delete' object.id %}">🗑️ Delete</a> |
-  <a href="/plants/">Back to My Plants</a>
+  <a href="{% url 'plant-list' %}">Back to My Plants</a>
 {% endblock %}

@@ -5,6 +5,10 @@ class PlantForm(forms.ModelForm):
     class Meta:
         model = Plant
         fields = ['name', 'species', 'description', 'growth_stage', 'health', 'accessories']
+        widgets = {
+            'accessories': forms.CheckboxSelectMultiple(),
+        }
+
 
 
 class AccessoryForm(forms.ModelForm):

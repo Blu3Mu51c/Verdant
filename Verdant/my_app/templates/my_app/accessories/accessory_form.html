@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="accessory-form">
+  <h1>
+    {% if accessory %}✏️ Edit Accessory{% else %}➕ Add Accessory{% endif %}
+  </h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">
+      {% if accessory %}Save Changes{% else %}Add Accessory{% endif %}
+    </button>
+  </form>
+
+  <a href="{% url 'accessory-list' %}" class="btn">⬅ Cancel</a>
+</section>
+{% endblock %}

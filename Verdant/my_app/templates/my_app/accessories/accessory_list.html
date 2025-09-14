@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="accessory-list">
+  <h1>🪴 Accessories</h1>
+  <a href="{% url 'accessory-create' %}" class="btn">➕ Add Accessory</a>
+
+  {% if accessories %}
+    <ul>
+      {% for accessory in accessories %}
+        <li>
+          <a href="{% url 'accessory-detail' accessory.id %}">
+            {{ accessory.name }}
+          </a> 
+          ({{ accessory.type }})
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No accessories yet. Add one!</p>
+  {% endif %}
+</section>
+{% endblock %}

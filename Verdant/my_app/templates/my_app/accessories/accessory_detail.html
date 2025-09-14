@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="accessory-detail">
+  <h1>{{ accessory.name }}</h1>
+  <p><strong>Type:</strong> {{ accessory.type }}</p>
+  <p><strong>Notes:</strong> {{ accessory.description|default:"—" }}</p>
+
+  <a href="{% url 'accessory-update' accessory.id %}" class="btn">✏️ Edit</a>
+  <form method="post" action="{% url 'accessory-delete' accessory.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn danger">🗑 Delete</button>
+  </form>
+  <a href="{% url 'accessory-list' %}" class="btn">⬅ Back to Accessories</a>
+</section>
+{% endblock %}

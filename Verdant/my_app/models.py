@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 
@@ -19,8 +20,10 @@ class Accessory(models.Model):
     def __str__(self):
         return f"{self.name} ({self.type})"
 
+    def get_absolute_url(self):
+        return reverse("accessory-detail", kwargs={"pk": self.id})
 
-# Main Plant model
+
 class Plant(models.Model):
     GROWTH_STAGES = [
         ('seedling', 'Seedling'),
@@ -41,6 +44,9 @@ class Plant(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.species})"
+
+    def get_absolute_url(self):
+        return reverse("plant-detail", kwargs={"pk": self.id})
 
 
 # Tracks user interactions with plants

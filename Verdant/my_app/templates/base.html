@@ -10,9 +10,7 @@
     <link rel="shortcut icon" type="image/png" href="{% static 'images/leaf-icon.png' %}" />
     <title>Verdant 🌱</title>
 
-    {% block head %}
-
-    {% endblock %}
+    {% block head %}{% endblock %}
   </head>
 
   <body>
@@ -23,15 +21,10 @@
       <nav>
         <ul>
           {% if user.is_authenticated %}
-            <li>
-              <a href="{% url 'plant-list' %}">My Plants</a>
-            </li>
-            <li>
-              <a href="{% url 'plant-create' %}">Add Plant</a>
-            </li>
-            <li>
-              <a href="{% url 'about' %}">About</a>
-            </li>
+            <li><a href="{% url 'plant-list' %}">🌿 My Plants</a></li>
+            <li><a href="{% url 'plant-create' %}">➕ Add Plant</a></li>
+            <li><a href="{% url 'accessory-list' %}">🪴 Accessories</a></li>
+            <li><a href="{% url 'about' %}">ℹ️ About</a></li>
             <li>
               <form id="logout-form" method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
@@ -39,24 +32,16 @@
               </form>
             </li>
           {% else %}
-            <li>
-              <a href="{% url 'about' %}">About</a>
-            </li>
-            <li>
-              <a href="{% url 'home' %}">Login</a>
-            </li>
-            <li>
-              <a href="{% url 'signup' %}">Sign Up</a>
-            </li>
+            <li><a href="{% url 'about' %}">ℹ️ About</a></li>
+            <li><a href="{% url 'home' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
           {% endif %}
         </ul>
       </nav>
     </header>
 
     <main>
-      {% block content %}
-
-      {% endblock %}
+      {% block content %}{% endblock %}
     </main>
   </body>
 </html>
