@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, DetailView
+
+from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 from django.urls import reverse_lazy
 from django.urls import reverse
 from django.utils import timezone
@@ -11,14 +13,28 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
+from .models import Plant, Accessory, CareAction, PlantActivity
 from .forms import PlantForm, AccessoryForm, CareActionForm
-from .models import Plant, Accessory, CareAction
 
 
 
-# Home page (login)
 class Home(LoginView):
     template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_authenticated:
+            context['total_plants'] = Plant.objects.filter(owner=user).count()
+            context['healthy_plants'] = Plant.objects.filter(owner=user, growth_stage='healthy').count()
+            context['needs_care'] = Plant.objects.filter(owner=user).exclude(growth_stage='healthy').count()
+            context['recent_activities'] = PlantActivity.objects.filter(plant__owner=user).order_by('-timestamp')[:5]
+        else:
+            context['total_plants'] = 0
+            context['healthy_plants'] = 0
+            context['needs_care'] = 0
+            context['recent_activities'] = []
+        return context
 
 # About page
 def about(request):
@@ -133,20 +149,11 @@ class CareActionCreateView(LoginRequiredMixin, CreateView):
         plant = Plant.objects.get(pk=self.kwargs['pk'])
         form.instance.plant = plant
 
-        # Update plant health based on action type
-        if form.instance.action_type == 'water':
-            plant.health = min(100, plant.health + 10)
-        elif form.instance.action_type == 'fertilize':
-            plant.health = min(100, plant.health + 15)
-        elif form.instance.action_type == 'prune':
-            plant.health = min(100, plant.health + 5)
-        elif form.instance.action_type == 'sunlight':
-            plant.health = min(100, plant.health + 5)
-
-        # Reset last cared for timestamp
+        # last_cared_for timestamp can still be updated
         plant.last_cared_for = timezone.now()
         plant.save()
 
+        # Saving the form will trigger CareAction.save() and handle HP/penalty
         return super().form_valid(form)
 
     def get_success_url(self):

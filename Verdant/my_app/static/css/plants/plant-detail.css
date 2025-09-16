@@ -1,0 +1,167 @@
+.plant-detail-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.plant-card {
+  background: #f1f8f1;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  padding: 2rem;
+  max-width: 700px;
+  width: 100%;
+  font-family: 'Helvetica', sans-serif;
+}
+
+.plant-name {
+  font-size: 2rem;
+  color: #2e7d32;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.plant-description {
+  font-size: 1.1rem;
+  color: #1b5e20;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.plant-status p {
+  font-size: 1rem;
+  margin: 0.3rem 0;
+}
+
+.plant-needs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  justify-content: center;
+}
+
+.badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.badge.watering { background: #0288d1; }
+.badge.fertilizer { background: #f9a825; }
+.badge.pruning { background: #6a1b9a; }
+.badge.sunlight { background: #f57f17; }
+
+.plant-accessories h3 {
+  margin-top: 1.5rem;
+  color: #2e7d32;
+}
+
+.plant-accessories ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.plant-accessories li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #c8e6c9;
+}
+
+.plant-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.btn-action {
+  background: #43a047;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn-action:hover {
+  background: #2e7d32;
+}
+
+.plant-footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn-footer {
+  background: #307434;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-footer.delete { background: #e53935; }
+
+.btn-footer:hover {
+  opacity: 0.85;
+}
+.plant-img-container {
+  text-align: center; /* center the image */
+  margin: 1.5rem 0;
+}
+
+.plant-img-container img {
+  max-width: 200px;
+  height: auto;
+  border-radius: 12px;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Glow or pulse for unhealthy plants */
+.plant-img-container.unhealthy img {
+  animation: pulse-red 1.5s infinite;
+}
+
+.plant-img-container.dead img {
+  opacity: 0.6;
+  filter: grayscale(80%);
+}
+
+@keyframes pulse-red {
+  0% { box-shadow: 0 0 10px 0 rgba(229, 57, 53, 0.7); transform: scale(1); }
+  50% { box-shadow: 0 0 20px 5px rgba(229, 57, 53, 1); transform: scale(1.05); }
+  100% { box-shadow: 0 0 10px 0 rgba(229, 57, 53, 0.7); transform: scale(1); }
+}
+
+/* Health bar */
+.health-bar-container {
+  margin: 1rem 0;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.health-bar {
+  width: 100%;
+  height: 20px;
+  background: #c8e6c9; /* light green background */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.health-fill {
+  height: 100%;
+  border-radius: 12px 0 0 12px;
+  transition: width 0.5s ease, background-color 0.5s ease;
+}

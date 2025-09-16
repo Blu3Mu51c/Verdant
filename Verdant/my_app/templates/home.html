@@ -3,31 +3,65 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+<link rel="stylesheet" href="{% static 'css/form.css' %}" />
 {% endblock %}
 
 {% block content %}
-<section class="logo-container">
-  <div class="plant-container">
-    <img src="{% static 'images/splash-plant.svg' %}" alt="Verdant Plant Logo" />
-  </div>
-  <img src="{% static 'images/logotype-plant.svg' %}" alt="Text reads: Verdant" />
-</section>
 
 {% if not user.is_authenticated %}
-  <section>
+<section>
+  <div class="login-container">
     <form action="{% url 'home' %}" method="post" class="login">
-      <h1>Login</h1>
+      <h1>Login to Your Garden</h1>
       {% csrf_token %}
       {{ form.as_p }}
       <input type="hidden" name="next" value="{{ next }}" />
       <button type="submit" class="btn submit">Login</button>
     </form>
-  </section>
-{% else %}
-  <div class="home-container">
-    <h1>Welcome to Verdant</h1>
-    <p>Track, add, and explore your plants!</p>
-
+    <p class="signup-prompt">Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>
   </div>
+</section>
+
+{% else %}
+<section class="dashboard-section">
+   <div class="dashboard-header">
+    <h1 class="greeting">Welcome back, {{ user.username|capfirst }}!</h1>
+  </div>
+
+  <div class="dashboard-cards">
+    <div class="card">
+      <h3>Total Plants</h3>
+      <p>{{ total_plants }}</p>
+    </div>
+    <div class="card">
+      <h3>Plants Needing Care</h3>
+      <p>{{ needs_care }}</p>
+    </div>
+    <div class="card">
+      <h3>Healthy Plants</h3>
+      <p>{{ healthy_plants }}</p>
+    </div>
+  </div>
+
+  <div class="dashboard-actions">
+    <a href="{% url 'plant-create' %}" class="btn btn-success">+ Add Plant</a>
+    <a href="{% url 'plant-list' %}" class="btn btn-secondary">View Garden</a>
+  </div>
+
+  <div class="recent-activity">
+    <h2>Recent Plant Activity</h2>
+    <ul>
+      {% for activity in recent_activities %}
+        <li>
+          <span class="activity-date">{{ activity.timestamp|date:"M d, Y H:i" }}</span>:
+          <span class="activity-message">{{ activity.message }}</span>
+        </li>
+      {% empty %}
+        <li>No recent activity.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
 {% endif %}
+
 {% endblock %}

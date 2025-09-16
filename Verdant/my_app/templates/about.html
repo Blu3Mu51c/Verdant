@@ -1,50 +1,49 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/about.css' %}" />
+{% endblock %}
 
 {% block content %}
-<div class="about-container">
-    <h1>About Verdant</h1>
+<section class="about-page">
+  <div class="about-hero">
+    <h1 class="about-title">About Verdant</h1>
+    <p class="about-subtitle">Grow, nurture, and track your virtual garden in a fun and interactive way!</p>
+  </div>
 
-    <p>
-        Verdant is a fun and interactive Django web application that allows users to 
-        manage their own virtual garden. With Verdant, you can grow, care for, and track 
-        your plants, making plant care both engaging and educational.
-    </p>
+  <div class="about-content">
 
-    <h2>Features</h2>
-    <ul>
+    <div class="about-section">
+      <h2 class="about-section-title">🌱 Features</h2>
+      <ul class="about-list">
         <li><strong>User Management:</strong> Sign up, login, and manage your personal garden.</li>
-        <li><strong>Plant Care:</strong> Add new plants, track their growth, and perform care actions like watering, fertilizing, and pruning.</li>
+        <li><strong>Plant Care:</strong> Add new plants, track their growth, and perform actions like watering, fertilizing, and pruning.</li>
         <li><strong>Growth System:</strong> Watch your plants grow through stages—from seedling to flowering—based on your care and attention.</li>
         <li><strong>Health Tracking:</strong> Each plant has a health status that reflects its current condition, encouraging regular care.</li>
-        <li><strong>Accessories:</strong> Attach decorative or functional accessories to your plants to enhance their growth or appearance.</li>
-        <li><strong>Gamification:</strong> Earn badges and achievements for consistently caring for your plants and reaching full growth stages.</li>
-    </ul>
+        <li><strong>Accessories:</strong> Attach decorative or functional accessories to your plants to enhance growth or appearance.</li>
+        <li><strong>Gamification:</strong> Earn badges and achievements for consistently caring for your plants.</li>
+      </ul>
+    </div>
 
-    <h2>Why Verdant?</h2>
-    <p>
-        Verdant encourages daily interaction and responsibility, making it perfect for plant enthusiasts 
-        and anyone who wants to enjoy the satisfaction of nurturing virtual greenery. Whether you’re 
-        learning about plant care or just enjoying a relaxing virtual garden, Verdant makes it simple 
-        and fun.
-    </p>
+    <div class="about-section">
+      <h2 class="about-section-title">🌿 Why Verdant?</h2>
+      <p>Verdant encourages daily interaction and responsibility, making it perfect for plant enthusiasts and anyone who wants to enjoy nurturing virtual greenery. Whether you’re learning plant care or enjoying a relaxing garden, Verdant makes it simple and fun.</p>
+    </div>
 
-    <h2>Tech Stack</h2>
-    <p>
-        Verdant is built with <strong>Django 5.x</strong> and <strong>Python 3.11</strong> for the backend, 
-        using <strong>SQLite</strong> (development) or <strong>PostgreSQL</strong> (production) as the database. 
-        The frontend is built with <strong>HTML, CSS, and Django templates</strong>, with static assets 
-        organized in the <code>/static/</code> folder.
-    </p>
+    <div class="about-section">
+      <h2 class="about-section-title">💻 Tech Stack</h2>
+      <p>Built with <strong>Django 5.x</strong> and <strong>Python 3.11</strong> on the backend, using <strong>SQLite</strong> (development) or <strong>PostgreSQL</strong> (production). The frontend uses <strong>HTML, CSS, and Django templates</strong>, with static assets in <code>/static/</code>.</p>
+      <p>Background tasks automatically update plant health and growth stages, providing a dynamic experience.</p>
+    </div>
 
-    <p>
-        Verdant uses background tasks to automatically update plant health and growth stages, providing 
-        a dynamic and interactive experience.
-    </p>
+    <div class="about-section">
+      <h2 class="about-section-title">🌸 Get Started</h2>
+      <p>Sign up today to create your virtual garden. Add plants, track their growth, unlock achievements, and watch your plants flourish!</p>
+      <a href="{% url 'plant-list' %}" class="btn btn-primary about-cta">Create Your Garden</a>
+      
+    </div>
 
-    <h2>Get Started</h2>
-    <p>
-        Sign up to create your virtual garden, add plants, and start caring for them today. Track your progress, 
-        unlock achievements, and watch your plants flourish!
-    </p>
-</div>
+  </div>
+</section>
 {% endblock %}

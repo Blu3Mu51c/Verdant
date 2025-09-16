@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
 {% block head %}
@@ -7,32 +6,41 @@
 {% endblock %}
 
 {% block content %}
-  <h1 class="plants-title">My Plants</h1>
-
-  <a href="{% url 'plant-create' %}" class="add-plant-btn">+ Add a New Plant</a>
+<section class="garden-container">
+  <h1 class="garden-title"> {{ user.username|capfirst }}'s Garden</h1>
+  <a href="{% url 'plant-create' %}" class="add-plant-btn">Add a new Plant</a>
 
   {% if plants %}
-    <ul class="plants-container">
+  
+    <div class="garden-bed">
       {% for plant in plants %}
-        <li class="plant-card">
-          <div class="plant-img-container">
-            {% if plant.growth_stage == 'seedling' %}
-              <img src="{% static 'images/plants/seedling.png' %}" alt="{{ plant.name }} - Seedling" />
-            {% elif plant.growth_stage == 'juvenile' %}
-              <img src="{% static 'images/plants/juvenile.png' %}" alt="{{ plant.name }} - Juvenile" />
-            {% elif plant.growth_stage == 'mature' %}
-              <img src="{% static 'images/plants/mature.png' %}" alt="{{ plant.name }} - Mature" />
-            {% elif plant.growth_stage == 'flowering' %}
-              <img src="{% static 'images/plants/flowering.png' %}" alt="{{ plant.name }} - Flowering" />
-            {% endif %}
-          </div>
 
-          <a href="{% url 'plant-detail' plant.id %}" class="plant-name">{{ plant.name }} ({{ plant.species }})</a>
-          <p class="plant-info">Growth: {{ plant.get_growth_stage_display }} | Health: {{ plant.health }}</p>
-        </li>
+        <div class="plant-card">
+          <a href="{% url 'plant-detail' plant.id %}" class="plant-name">
+          <div class="plant-pot">
+            <div class="plant-img-container">
+              {% if plant.growth_stage == 'dead' %}
+                <img src="{% static 'images/plants/dead.png' %}" alt="{{ plant.name }} - Dead" />
+              {% elif plant.growth_stage == 'wilting' %}
+                <img src="{% static 'images/plants/wilting.png' %}" alt="{{ plant.name }} - Wilting" />
+              {% elif plant.growth_stage == 'weak' %}
+                <img src="{% static 'images/plants/weak.png' %}" alt="{{ plant.name }} - Weak" />
+              {% elif plant.growth_stage == 'unhealthy' %}
+                <img src="{% static 'images/plants/unhealthy.png' %}" alt="{{ plant.name }} - Unhealthy" />
+              {% elif plant.growth_stage == 'healthy' %}
+                <img src="{% static 'images/plants/healthy.png' %}" alt="{{ plant.name }} - Healthy" />
+              {% endif %}
+            </div>
+          </div>
+          <div class="plant-info-box">
+            {{ plant.name }} ({{ plant.species }})</a>
+            <p class="plant-info">Status: {{ plant.growth_stage|capfirst }} | ❤️ {{ plant.health }}</p>
+          </div>
+        </div>
       {% endfor %}
-    </ul>
+    </div>
   {% else %}
-    <p class="no-plants-msg">You don’t have any plants yet. Add one!</p>
+    <p class="no-plants-msg">Your garden is empty. Plant something new! 🌸</p>
   {% endif %}
+</section>
 {% endblock %}

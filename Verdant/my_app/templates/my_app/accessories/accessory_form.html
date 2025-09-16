@@ -1,18 +1,26 @@
 {% extends 'base.html' %}
-{% block content %}
-<section class="accessory-form">
-  <h1>
-    {% if accessory %}✏️ Edit Accessory{% else %}➕ Add Accessory{% endif %}
-  </h1>
+{% load static %}
 
-  <form method="post">
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <form method="post" class="accessory-form">
+    <h1>
+      {% if accessory %}Edit Accessory{% else %}Add Accessory{% endif %}
+    </h1>
+    
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn">
-      {% if accessory %}Save Changes{% else %}Add Accessory{% endif %}
-    </button>
+    
+    <div class="form-actions">
+      <a href="{% url 'accessory-list' %}" class="btn-secondary">Cancel</a>
+      <button type="submit" class="btn-primary">
+        {% if accessory %}Save Changes{% else %}Add Accessory{% endif %}
+      </button>
+    </div>
   </form>
-
-  <a href="{% url 'accessory-list' %}" class="btn">⬅ Cancel</a>
-</section>
+</div>
 {% endblock %}

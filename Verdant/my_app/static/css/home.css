@@ -1,0 +1,171 @@
+/* General Container */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  font-family: 'Helvetica', sans-serif;
+  color: #1b5e20;
+}
+
+/* ---------- Greeting Section ---------- */
+.dashboard-section {
+  margin: 30px 0;
+  position: relative;
+}
+
+.dashboard-header h1.greeting {
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #7fff86, #196724);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
+/* Dashboard Cards */
+.dashboard-cards {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: #f1f8f1;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+  padding: 1.5rem;
+  text-align: center;
+  min-width: 200px;
+  flex: 1;
+  max-width: 250px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  color: #2e7d32;
+  margin-bottom: 0.8rem;
+}
+
+.card p {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1b5e20;
+}
+
+/* Buttons */
+.home-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.btn {
+  background: #43a047;
+  color: white;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #2e7d32;
+}
+
+.btn-secondary {
+  background: #0288d1;
+}
+
+.btn-secondary:hover {
+  background: #01579b;
+}
+
+/* Recent Activity */
+.recent-activity {
+  width: 100%;
+  max-width: 700px;
+  background: #f1f8f1;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+}
+
+.recent-activity h2 {
+  font-size: 1.4rem;
+  color: #2e7d32;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.recent-activity ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.recent-activity li {
+  padding: 0.6rem;
+  border-bottom: 1px solid #c8e6c9;
+  font-size: 0.95rem;
+  color: #1b5e20;
+}
+
+.recent-activity li:last-child {
+  border-bottom: none;
+}
+
+.recent-activity li::before {
+  content: "🌱 ";
+  font-size: 1rem;
+}
+
+/* Login Form (when not logged in) */
+form.login {
+  background: #f1f8f1;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+  max-width: 400px;
+  margin: 3rem auto;
+}
+
+form.login h1 {
+  text-align: center;
+  color: #2e7d32;
+  margin-bottom: 1rem;
+}
+
+form.login p {
+  margin: 0.8rem 0;
+}
+
+form.login input,
+form.login select,
+form.login textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #c8e6c9;
+  font-size: 1rem;
+  margin-top: 0.3rem;
+}
+
+form.login input:focus {
+  border-color: #43a047;
+  outline: none;
+}
+
+form.login .btn.submit {
+  margin-top: 1.2rem;
+  width: 100%;
+}

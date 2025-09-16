@@ -1,0 +1,120 @@
+/* accessory-list.css - Garden Style */
+body {
+  font-family: "Poppins", sans-serif;
+  color: #244d29;
+}
+
+.accessory-list {
+  text-align: center;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto;
+}
+
+.accessory-title {
+  font-size: 2.8rem;
+  margin-bottom: 1.5rem;
+  color: #2f7d32;
+  text-shadow: 1px 1px 5px rgba(100,150,100,0.2);
+}
+
+.add-accessory-btn {
+  background: #4caf50;
+  color: white;
+  padding: 0.8rem 1.6rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.add-accessory-btn:hover {
+  background: #2e7031;
+}
+
+/* Grid layout */
+.accessory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.accessory-card {
+  background: #fdfdfd;
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+.accessory-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* Card content */
+.accessory-card-content {
+  padding: 1rem;
+}
+
+.accessory-name {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #33691e;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+.accessory-name:hover {
+  color: #558b2f;
+}
+
+.accessory-type {
+  display: inline-block;
+  background: #f1f8e9;
+  color: #5d4037;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+
+.accessory-description {
+  color: #607d3b;
+  line-height: 1.5;
+}
+
+/* Empty state */
+.accessory-empty {
+  text-align: center;
+  padding: 3rem;
+  background: #f8f6f0;
+  border-radius: 12px;
+  color: #5d4037;
+}
+.accessory-empty p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+.accessory-empty .btn {
+  background: #4caf50;
+  color: white;
+  padding: 0.8rem 1.6rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.accessory-empty .btn:hover {
+  background: #2e7031;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .accessory-grid {
+    grid-template-columns: 1fr;
+  }
+}

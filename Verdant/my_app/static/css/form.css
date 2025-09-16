@@ -1,87 +1,365 @@
-/* Global form styling */
-form {
+/* forms.css - Comprehensive form styling for Verdant */
 
-  max-width: 600px;
-
+/* ===== BASE FORM STYLES ===== */
+.form-container,
+.accessory-form,
+.care-action-form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
-form h1, form h2 {
-  color: #2e7d32;
-  text-align: center;
-  margin-bottom: 1.5rem;
+.page-header {
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
+.page-header h1 {
+    color: #2e7d32;
+    font-size: 2.2rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.page-header h1:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, #8bc34a, #2e7d32);
+    border-radius: 3px;
+}
+
+/* Form titles */
+form h1,
+.care-action-title,
+.accessory-form h1 {
+    color: #2e7d32;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+form h1:after,
+.care-action-title:after,
+.accessory-form h1:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, #8bc34a, #2e7d32);
+    border-radius: 3px;
+}
+
+/* ===== FORM ELEMENTS ===== */
+form{
+    width: 100%;
+}
+
+form.login {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Paragraph wrapper for form fields (from form.as_p) */
+form p {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Table wrapper for form fields (from form.as_table) */
+form table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+form table tr {
+    border-bottom: 1px solid #eee;
+}
+
+form table th,
+form table td {
+    padding: 0.75rem 0;
+    vertical-align: top;
+}
+
+form table th {
+    text-align: left;
+    font-weight: 500;
+    color: #5d4037;
+    width: 30%;
+    padding-right: 1rem;
+}
+
+/* Labels */
 form label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #1b5e20;
+    font-weight: 500;
+    color: #5d4037;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
 }
 
-
-
+/* Input fields, textareas, and selects */
 form input[type="text"],
-form input[type="email"],
 form input[type="password"],
+form input[type="email"],
+form input[type="url"],
+form input[type="number"],
+form input[type="date"],
+form input[type="file"],
 form textarea,
 form select {
-  width: 100%;
-  padding: 0.6rem 1rem;
-  margin-bottom: 1.2rem;
-  border: 1px solid #66bb6a;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border 0.2s, box-shadow 0.2s;
+    padding: 0.8rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f6f0;
+    width: 100%;
+    font-family: inherit;
 }
 
-form input:focus,
+/* Focus states */
+form input[type="text"]:focus,
+form input[type="password"]:focus,
+form input[type="email"]:focus,
+form input[type="url"]:focus,
+form input[type="number"]:focus,
+form input[type="date"]:focus,
+form input[type="file"]:focus,
 form textarea:focus,
 form select:focus {
-  border-color: #43a047;
-  box-shadow: 0 0 5px rgba(66, 160, 71, 0.4);
-  outline: none;
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
 }
 
-form button {
-  background: #43a047;
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 0.8rem 2rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  display: block;
-
-  transition: background 0.3s;
+/* Textarea specific styling */
+form textarea {
+    min-height: 120px;
+    resize: vertical;
 }
 
-form button:hover {
-  background: #388e3c;
+/* Custom select dropdowns */
+form select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232e7d32'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7em top 50%;
+    background-size: 1.2em;
+    padding-right: 2.5em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
-form .errorlist {
-  color: #d32f2f;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
+/* Date picker styling */
+form input[type="date"] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232e7d32'%3E%3Cpath d='M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7em top 50%;
+    background-size: 1.2em;
+    padding-right: 2.5em;
 }
 
-form p {
-  text-align: center;
-  font-size: 0.95rem;
+/* Checkboxes and radio buttons */
+form input[type="checkbox"],
+form input[type="radio"] {
+    margin-right: 0.5rem;
+    width: auto;
+    transform: scale(1.2);
 }
 
-form p a {
-  color: #43a047;
-  text-decoration: none;
-  font-weight: 600;
+/* Help text */
+form .helptext {
+    font-size: 0.85rem;
+    color: #8d6e63;
+    margin-top: 0.25rem;
+    font-style: italic;
 }
 
-form p a:hover {
-  color: #2e7d32;
-  text-decoration: underline;
+/* ===== BUTTONS ===== */
+form input[type="submit"],
+form button[type="submit"],
+.btn,
+.btn-primary,
+.btn-submit {
+    background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+    color: white;
+    border: none;
+    padding: 0.9rem 1.8rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
 }
 
+form input[type="submit"]:hover,
+form button[type="submit"]:hover,
+.btn:hover,
+.btn-primary:hover,
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+}
+
+/* Secondary button */
+.btn-secondary {
+    background: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 0.9rem 1.8rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-secondary:hover {
+    background: #e0e0e0;
+    text-decoration: none;
+    color: #333;
+    transform: translateY(-2px);
+}
+
+/* Form actions container */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: flex-end;
+}
+
+/* ===== ERROR HANDLING ===== */
+.errorlist {
+    list-style: none;
+    color: #f44336;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    padding: 0;
+}
+
+.errorlist li {
+    padding: 0.25rem 0;
+}
+
+.red-text {
+    color: #f44336;
+    background: #ffebee;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #f44336;
+}
+
+/* Form-specific error states */
+form input.error,
+form textarea.error,
+form select.error {
+    border-color: #f44336;
+}
+
+/* Non-field errors */
+form .nonfield-errors {
+    background-color: #ffebee;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #f44336;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .form-container,
+    .accessory-form,
+    .care-action-form-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    form h1,
+    .care-action-title,
+    .accessory-form h1,
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    form input[type="submit"],
+    form button[type="submit"],
+    .btn,
+    .btn-primary,
+    .btn-submit,
+    .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+    
+    form table th,
+    form table td {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 0;
+    }
+    
+    form table th {
+        padding-bottom: 0.25rem;
+    }
+    
+    form table tr {
+        border-bottom: none;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+    }
+}
+
+/* Animation for form elements */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-container,
+.accessory-form,
+.care-action-form-container {
+    animation: fadeIn 0.6s ease-out;
+}
 
 /* Logout button (navbar) */
 #logout-form {
@@ -104,3 +382,4 @@ form p a:hover {
 #logout-form button.btn-logout:hover {
   background: #388e3c; /* darker green on hover */
 }
+

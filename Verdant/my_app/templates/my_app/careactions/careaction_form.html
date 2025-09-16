@@ -1,15 +1,38 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
 {% block content %}
-<h1>Add Care Action</h1>
+<div class="care-action-form-container">
+  <h1 class="care-action-title">Add Care Action</h1>
 
-<form method="post">
+  <form method="post" class="care-action-form">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
-
-<a href="{% url 'plant-detail' plant_id %}">Cancel</a>
+    
+    {% for field in form %}
+    <div class="form-group">
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+      {% if field.help_text %}
+        <small class="helptext">{{ field.help_text }}</small>
+      {% endif %}
+      {% if field.errors %}
+        <ul class="errorlist">
+          {% for error in field.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    {% endfor %}
+    
+    <div class="form-actions">
+      <a href="{% url 'plant-detail' plant_id %}" class="btn-secondary">Cancel</a>
+      <button type="submit" class="btn-primary">Save Care Action</button>
+    </div>
+  </form>
+</div>
 {% endblock %}

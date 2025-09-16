@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,49 +13,54 @@
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/png" href="{% static 'images/leaf-icon.png' %}">
 
-  <title>Verdant 🌱</title>
+  <title>Verdant</title>
+
 
   {% block head %}{% endblock %}
 </head>
-<body>
+<body id="page-container">
   <!-- Header / Navbar -->
-  <header>
-    <div class="header-logo-container">
-      <a href="{% url 'home' %}">
-        <img src="{% static 'images/header-logo-plant.png' %}" alt="Verdant Logo">
-      </a>
-    </div>
+  <header id="main-header" class="header-primary">
+    <div class="header-content">
+      <div class="logo-container" id="header-logo">
+        <a href="{% url 'home' %}" class="logo-link">
+          <img src="{% static 'images/logo2.png' %}" alt="Verdant Logo" class="logo-image">
+        </a>
+      </div>
 
-    <nav>
-      <ul class="nav-links">
-        {% if user.is_authenticated %}
-          <li><a href="{% url 'plant-list' %}">My Plants</a></li>
-          <li><a href="{% url 'plant-create' %}">Add Plant</a></li>
-          <li><a href="{% url 'accessory-list' %}">Accessories</a></li>
-          <li><a href="{% url 'about' %}">About</a></li>
-          <li>
-            <form id="logout-form" method="post" action="{% url 'logout' %}">
+      <nav id="main-navigation" class="nav-primary">
+        <ul class="nav-menu">
+          {% if user.is_authenticated %}
+            <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="{% url 'plant-list' %}" class="nav-link">My Garden</a></li>
+            <li class="nav-item"><a href="{% url 'accessory-list' %}" class="nav-link">Accessories</a></li>
+            <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+            <li class="nav-item">
+              <form id="logout-form" method="post" action="{% url 'logout' %}">
               {% csrf_token %}
               <button type="submit" class="btn-logout">Log out</button>
             </form>
-          </li>
-        {% else %}
-          <li><a href="{% url 'about' %}">About</a></li>
-          <li><a href="{% url 'home' %}">Login</a></li>
-          <li><a href="{% url 'signup' %}">Sign Up</a></li>
-        {% endif %}
-      </ul>
-    </nav>
+            </li>
+          {% else %}
+          <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Login</a></li>
+          <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link">Sign Up</a></li>
+          <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <!-- Main content -->
-  <main class="container">
-    {% block content %}{% endblock %}
+  <main id="main-content" class="main-container">
+    <div class="content-container">
+      {% block content %}{% endblock %}
+    </div>
   </main>
 
   <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Verdant. All rights reserved.</p>
+  <footer id="page-footer" class="footer-primary">
+    <p class="footer-text">&copy; 2025 Verdant. All rights reserved.</p>
   </footer>
 
 </body>

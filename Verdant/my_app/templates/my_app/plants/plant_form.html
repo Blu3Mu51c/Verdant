@@ -1,13 +1,22 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
 
 {% block content %}
-  <h1>{% if object %}Edit Plant{% else %}Add Plant{% endif %}</h1>
-  
-  <form method="post">
+<div class="form-container">
+  <form method="post" class="plant-form">
+    <h1>{% if object %}Edit Plant{% else %}Add Plant{% endif %}</h1>
+    
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save</button>
+    
+    <div class="form-actions">
+      <a href="{% url 'plant-list' %}" class="btn-secondary">Cancel</a>
+      <button type="submit" class="btn-primary">Save Plant</button>
+    </div>
   </form>
-
-  <a href="{% url 'plant-list' %}">Back to My Plants</a>
+</div>
 {% endblock %}

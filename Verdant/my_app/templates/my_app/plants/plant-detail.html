@@ -3,36 +3,100 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/plants/plant-detail.css' %}">
+  <link rel="stylesheet" href="{% static 'css/plants/plant-detail.css' %}" />
 {% endblock %}
+
 {% block content %}
-  <h1>{{ object.name }} ({{ object.species }})</h1>
+  <div class="plant-detail-container">
+    <div class="plant-card">
+      <h1 class="plant-name">{{ object.name }} ({{ object.species }})</h1>
+      <p class="plant-description">{{ object.description }}</p>
 
-  <p>{{ object.description }}</p>
-  <p>Growth Stage: {{ object.get_growth_stage_display }}</p>
-  <p>Health: {{ object.health }}</p>
-  <p>Planted on: {{ object.planting_date }}</p>
-  <p>Last cared for: {{ object.last_cared_for }}</p>
+      <div class="plant-status">
+        <div class="plant-img-container {% if object.health <= 40 and object.health > 0 %}
+            unhealthy
+          {% elif object.health == 0 %}
+            dead
+          {% endif %}">
+          {% if plant.growth_stage == 'dead' %}
+            <img src="{% static 'images/plants/dead.png' %}" alt="{{ plant.name }} - Dead" />
+          {% elif plant.growth_stage == 'wilting' %}
+            <img src="{% static 'images/plants/wilting.png' %}" alt="{{ plant.name }} - Wilting" />
+          {% elif plant.growth_stage == 'weak' %}
+            <img src="{% static 'images/plants/weak.png' %}" alt="{{ plant.name }} - Weak" />
+          {% elif plant.growth_stage == 'unhealthy' %}
+            <img src="{% static 'images/plants/unhealthy.png' %}" alt="{{ plant.name }} - Unhealthy" />
+          {% elif plant.growth_stage == 'healthy' %}
+            <img src="{% static 'images/plants/healthy.png' %}" alt="{{ plant.name }} - Healthy" />
+          {% endif %}
+        </div>
 
-  <h3>Accessories</h3>
-  {% if object.accessories.all %}
-    <ul>
-      {% for accessory in object.accessories.all %}
-        <li>{{ accessory.name }} ({{ accessory.get_type_display }})</li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No accessories added yet.</p>
-  {% endif %} 
-  </br>
-  </br>
-  <a href="{% url 'careaction-add' object.id %}">+ Add Care Action</a>
-  <a href="{% url 'careaction-list' object.id %}">View Care History</a>
-  </br>
-  </br>
-  </br>
-  </br>
-  <a href="{% url 'plant-update' object.id %}">Edit</a> |
-  <a href="{% url 'plant-delete' object.id %}">Delete</a> |
-  <a href="{% url 'plant-list' %}">Back to My Plants</a>
+        <p>
+          <strong>Growth Stage:</strong> {{ object.get_growth_stage_display }}
+        </p>
+
+        <div class="health-bar-container">
+          <span>Health: {{ plant.health }} </span>
+          <div class="health-bar">
+            <div class="health-fill"
+              style="width: {{ object.health }}%; background-color: {% if object.health > 70 %}
+                #43a047
+              {% elif object.health > 40 %}
+                #fbc02d
+              {% elif object.health > 0 %}
+                #e53935
+              {% else %}
+                #555
+              {% endif %};"></div>
+          </div>
+        </div>
+
+        <p>
+          <strong>Planted on:</strong> {{ object.planting_date }}
+        </p>
+        <p>
+          <strong>Last cared for:</strong> {{ object.last_cared_for }}
+        </p>
+      </div>
+
+      <div class="plant-needs">
+        {% if object.needs_watering %}
+          <span class="badge watering">⚠ Needs Watering</span>
+        {% endif %}
+        {% if object.needs_fertilizer %}
+          <span class="badge fertilizer">⚠ Needs Fertilizer</span>
+        {% endif %}
+        {% if object.needs_pruning %}
+          <span class="badge pruning">⚠ Needs Pruning</span>
+        {% endif %}
+        {% if object.needs_sunlight %}
+          <span class="badge sunlight">⚠ Needs Sunlight Adjustment</span>
+        {% endif %}
+      </div>
+
+      <div class="plant-accessories">
+        <h3>Accessories</h3>
+        {% if object.accessories.all %}
+          <ul>
+            {% for accessory in object.accessories.all %}
+              <li>{{ accessory.name }} ({{ accessory.get_type_display }})</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No accessories added yet.</p>
+        {% endif %}
+      </div>
+
+      <div class="plant-actions">
+        <a class="btn-action" href="{% url 'careaction-add' object.id %}">Add Care Action</a>
+        <a class="btn-action" href="{% url 'careaction-list' object.id %}">View Care History</a>
+      </div>
+
+      <div class="plant-footer">
+        <a class="btn-footer" href="{% url 'plant-update' object.id %}">Edit</a>
+        <a class="btn-footer delete" href="{% url 'plant-delete' object.id %}">Uproot</a>
+        <a class="btn-footer" href="{% url 'plant-list' %}">Back to My Garden</a>
+      </div>
+    </div>
+  </div>
 {% endblock %}

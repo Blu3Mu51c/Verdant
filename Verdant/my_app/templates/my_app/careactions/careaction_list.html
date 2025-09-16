@@ -5,17 +5,27 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/careactions/careaction-list.css' %}">
 {% endblock %}
-{% block content %}
-<h1>Care History</h1>
 
-{% if care_actions %}
-  <ul>
-    {% for action in care_actions %}
-      <li>{{ action.get_action_type_display }} on {{ action.date|date:"Y-m-d H:i" }}{% if action.notes %} - Notes: {{ action.notes }}{% endif %}</li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>No care actions logged yet.</p>
-{% endif %}
-<a href="{% url 'plant-detail' plant_id %}">Back to Plant</a>
+{% block content %}
+<div class="care-history-container">
+  <h1 class="care-history-title">Care History</h1>
+
+  {% if care_actions %}
+    <ul class="care-history-list">
+      {% for action in care_actions %}
+        <li class="care-history-item" data-action-type="{{ action.action_type }}">
+          <div class="care-action-type">{{ action.get_action_type_display }}</div>
+          <div class="care-action-date">on {{ action.date|date:"Y-m-d H:i" }}</div>
+          {% if action.notes %}
+            <div class="care-action-notes">{{ action.notes }}</div>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty-care-history">No care actions logged yet.</p>
+  {% endif %}
+  
+  <a href="{% url 'plant-detail' plant_id %}" class="back-to-plant">Back to Plant</a>
+</div>
 {% endblock %}
