@@ -1,6 +1,6 @@
 # Verdant 🌱
 
-Verdant is a Django web application that allows users to manage and care for virtual plants. Each plant grows over time, but requires attention from the user. Neglected plants may wilt or regress in growth. The app encourages daily interaction and gamifies plant care with growth stages, health tracking, and achievements.
+Verdant is a Django web application that allows users to manage and care for virtual plants. Each plant grows over time but requires attention from the user. Neglected plants may wilt or regress in growth. The app encourages daily interaction and gamifies plant care with growth stages, health tracking, and achievements.
 
 ---
 
@@ -15,162 +15,170 @@ Verdant is a Django web application that allows users to manage and care for vir
    - Attributes:
      - Name
      - Species / Type (Cactus, Fern, Flower, etc.)
-     - Growth Stage (Seedling → Juvenile → Mature → Flowering)
+     - Growth Stage (Healthy → Unhealthy → Weak → Dying → Dead)
      - Health (0–100)
      - Last cared for (timestamp)
-     - Optional: water level, sunlight, nutrients
+     - Accessories (optional)
 
-3. **Growth System**
-   - Plants grow over time if properly cared for.
-   - Requirements for growth:
-     - Water
-     - Sunlight
-     - Fertilizer
-   - Actions are recorded with timestamps.
-   - Plants advance to next growth stage only if requirements are met.
-   - Visual indicators for growth and health.
+3. **Care System**
+   - Users perform actions: Watering, Fertilizing, Pruning, Sunlight Adjustment.
+   - Care actions affect plant health:
+     - Correct care increases health.
+     - Incorrect care slightly decreases health.
+   - Actions are timestamped and tracked in **CareAction** and **PlantActivity** models.
 
-4. **Neglect System**
-   - If a plant is not tended for 1 week:
-     - Health decreases gradually.
-     - Growth may stagnate or regress.
-     - Plant may wilt (visual change).
-   - Cron jobs / background tasks automatically update plant health and growth status daily.
+4. **Growth & Neglect**
+   - Plant growth stages automatically update based on health.
+   - Health decreases over time if plants are neglected.
+   - Visual indicators show growth and health status.
 
-5. **Dashboard**
-   - User’s garden overview showing all plants.
+5. **Accessories**
+   - Attach accessories (pots, decorations, fertilizers) to plants.
+   - Optional effects on health or growth speed.
+
+6. **Dashboard**
+   - Overview of the user’s garden.
    - Highlights plants that need attention.
-   - Displays health, growth stage, and care history.
+   - Displays health, growth stage, accessories, and care history.
 
-6. **Gamification**
+7. **Gamification**
    - Achievements for reaching full growth.
-   - Badges for streaks of consistent care.
-   - Optional leveling system for plants.
+   - Badges for consistent care streaks.
 
-7. **Accessories (Optional)**
-   - Users can attach accessories to plants (pots, decorations, fertilizers).
-   - Accessories have optional effects (bonus health or growth speed).
-
-
+---
 
 ## Tech Stack
 
-- **Backend:**  
-  - **Django 5.x** – Main web framework handling routing, views, models, forms, authentication, and CRUD functionality.  
-  - **Python 3.11** – Programming language for all backend logic, including plant growth simulation and accessory management.
+- **Backend:** Django 5.x, Python 3.11  
+- **Database:** PostgreSQL (production), SQLite (development)  
+- **Frontend:** HTML5, CSS3, Django Templates  
+- **Background Tasks:** Cron jobs for daily updates  
+- **Version Control:** Git, GitHub  
+- **Development Tools:** VSCode, Python virtual environment  
 
-- **Database:**  
-  - **PostgreSQL** – For production for scalability and advanced querying capabilities.
-  - **SQLite** – Lightweight, easy to set up for development and testing.  
-
-- **Frontend:**  
-  - **HTML5 & CSS3** – Structure and styling for pages, responsive layouts, and component styling.  
-  - **Django Templates** – Dynamic rendering of data with template inheritance, loops, and conditionals.  
-
-- **Styling:**  
-  - **CSS:** Stylesheet language used to describe the presentation of a document written in HTML.
-  - **Images & Icons:** Stored in `/static/images/` for plant icons, accessories, and UI enhancements.
-
-- **Background Tasks / Scheduling:**  
-  - **Cron Jobs** – Automatically update plant growth and reminders if plants haven’t been tended.  
-
-- **Version Control & Collaboration:**  
-  - **Git** – Local version control.  
-  - **GitHub** – Remote repository for collaboration, backup, and version tracking.
-
-- **Development Tools & Environment:**  
-  - **Python Virtual Environment (pipenv)** – Isolated project dependencies.  
-  - **IDE / Editor:** VSCode for Django development.  
 ---
 
 ## Project Structure
 - Current Structure
 ```
-my_app/
-Verdant/
- ┣ my_app/
- ┃ ┣ static/
- ┃ ┃ ┗ css/
- ┃ ┃   ┣ base.css
- ┃ ┃   ┣ home.css
- ┃ ┃   ┣ form.css
- ┃ ┃   ┣ plants/
- ┃ ┃   ┃ ┣ plant-index.css
- ┃ ┃   ┃ ┗ plant-detail.css
- ┃ ┃   ┣ accessories/
- ┃ ┃   ┃ ┣ accessory-index.css
- ┃ ┃   ┃ ┗ accessory-detail.css
- ┃ ┗ templates/
- ┃     ┗ my_app/
- ┃       ┣ base.html
- ┃       ┣ home.html
- ┃       ┣ signup.html
- ┃       ┣ login.html
- ┃       ┣ about.html
- ┃       ┣ plants/
- ┃       ┃ ┣ plant_list.html
- ┃       ┃ ┣ plant_form.html
- ┃       ┃ ┣ plant_detail.html
- ┃       ┣ accessories/
- ┃       ┃ ┣ accessory_list.html
- ┃       ┃ ┣ accessory_form.html
- ┃       ┃ ┣ accessory_detail.html
- ┃       ┃ ┗ accessory_confirm_delete.html
- ┃       ┣ users/
- ┃       ┃ ┣ user_profile.html
- ┃       ┃ ┣ user_edit.html
- ┃       ┣ shared/
- ┃       ┃ ┣ navbar.html
- ┃       ┃ ┗ footer.html
- ┃ ┣ models.py
+Verdant
+ ┣ my_app
+ ┃ ┣ static
+ ┃ ┃ ┣ css
+ ┃ ┃ ┃ ┣ accessories
+ ┃ ┃ ┃ ┃ ┣ accessory-detail.css
+ ┃ ┃ ┃ ┃ ┗ accessory-list.css
+ ┃ ┃ ┃ ┣ careactions
+ ┃ ┃ ┃ ┃ ┗ careaction-list.css
+ ┃ ┃ ┃ ┣ plants
+ ┃ ┃ ┃ ┃ ┣ plant-list.css
+ ┃ ┃ ┃ ┃ ┗ plant-detail.css
+ ┃ ┃ ┃ ┣ home.css
+ ┃ ┃ ┃ ┣ form.css
+ ┃ ┃ ┃ ┣ about.css
+ ┃ ┃ ┃ ┗ base.css
+ ┃ ┃ ┗ images
+ ┃ ┃ ┃ ┣ plants
+ ┃ ┃ ┃ ┃ ┣ dead.png
+ ┃ ┃ ┃ ┃ ┣ healthy.png
+ ┃ ┃ ┃ ┃ ┣ unhealthy.png
+ ┃ ┃ ┃ ┃ ┣ weak.png
+ ┃ ┃ ┃ ┃ ┣ wilting.png
+ ┃ ┃ ┃ ┗ logo2.png
+ ┃ ┣ migrations
+ ┃ ┃ ┣ __init__.py
+ ┃ ┃ ┗ 0001_initial.py
+ ┃ ┣ management
+ ┃ ┃ ┗ commands
+ ┃ ┃ ┃ ┗ update_plants.py
+ ┃ ┣ templates
+ ┃ ┃ ┣ my_app
+ ┃ ┃ ┃ ┣ accessories
+ ┃ ┃ ┃ ┃ ┣ accessory_list.html
+ ┃ ┃ ┃ ┃ ┣ accessory_form.html
+ ┃ ┃ ┃ ┃ ┣ accessory_detail.html
+ ┃ ┃ ┃ ┃ ┗ accessory_confirm_delete.html
+ ┃ ┃ ┃ ┣ careactions
+ ┃ ┃ ┃ ┃ ┣ careaction_list.html
+ ┃ ┃ ┃ ┃ ┗ careaction_form.html
+ ┃ ┃ ┃ ┗ plants
+ ┃ ┃ ┃ ┃ ┣ plant_confirm_delete.html
+ ┃ ┃ ┃ ┃ ┣ plant_form.html
+ ┃ ┃ ┃ ┃ ┣ plant_list.html
+ ┃ ┃ ┃ ┃ ┗ plant-detail.html
+ ┃ ┃ ┣ home.html
+ ┃ ┃ ┣ signup.html
+ ┃ ┃ ┣ base.html
+ ┃ ┃ ┗ about.html
  ┃ ┣ views.py
- ┃ ┣ forms.py
+ ┃ ┣ tests.py
+ ┃ ┣ __init__.py
  ┃ ┣ urls.py
- ┃ ┗ admin.py
+ ┃ ┣ admin.py
+ ┃ ┣ models.py
+ ┃ ┣ apps.py
+ ┃ ┗ forms.py
+ ┣ Verdant
+ ┃ ┣ __init__.py
+ ┃ ┣ asgi.py
+ ┃ ┣ settings.py
+ ┃ ┣ urls.py
+ ┃ ┗ wsgi.py
+ ┣ Pipfile.lock
  ┣ manage.py
- ┣ requirements.txt
  ┣ README.md
- ┗ .gitignore
-
+ ┣ Pipfile
+ ┗ verdant
 ```
 ---
 ## Models and ERD
-Verdant has the following main models:
 
-1. **User** (built-in Django auth user)  
+**Main Models:**
+
+1. **User** (Django auth user)  
    - Fields: username, email, password, etc.  
-   - Relationship: One-to-Many with Plant
+   - Relationships: One-to-Many with Plant
 
 2. **Plant**  
-   - Fields: name, species, planting_date, description, growth_stage  
-   - Relationships:  
+   - Fields: name, species, planting_date, description, growth_stage, health, last_cared_for  
+   - Relationships:
      - Many-to-One: User → Plant  
      - Many-to-Many: Plant ↔ Accessory  
-     - One-to-Many: Plant → CareAction
+     - One-to-Many: Plant → CareAction  
+     - One-to-Many: Plant → PlantActivity
 
 3. **Accessory**  
-   - Fields: name, type, description
+   - Fields: name, type, description  
    - Relationships: Many-to-Many with Plant
 
-4. **CareAction**
-   - Fields: date, action_type (watering, fertilizing, pruning), notes  
+4. **CareAction**  
+   - Fields: action_type, date, notes  
    - Relationships: Many-to-One with Plant
+
+5. **PlantActivity**  
+   - Fields: message, timestamp  
+   - Relationships: Many-to-One with Plant
+
+---
 
 - **Relationships**
   - `User` → `Plant` : One-to-Many (a user can have many plants)
   - `Plant` → `Accessory` : Many-to-Many (plants can have multiple accessories)
-  - `Plant` → `CareAction` : One-to-Many (each care action is recorded)
+  - `Plant` → `CareAction` : One-to-Many (each care action is recorded for a plant)
+  - `Plant` → `PlantActivity` : One-to-Many (logs activity messages for a plant)
+
 
 **ERD Diagram (Conceptual)**
 ```
 User 1 ────< Plant >─────< Accessory
-  │
-  └───< CareAction >────── Plant
+              │
+              ├──< CareAction
+              │
+              └──< PlantActivity
+
 
 ``` 
 ```
-
-
 +----------------+        +----------------+        +----------------+
 |     User       |        |     Plant      |        |   Accessory    |
 +----------------+        +----------------+        +----------------+
@@ -180,24 +188,52 @@ User 1 ────< Plant >─────< Accessory
 | password       |        | description    |        | description    |        
 +----------------+        | planting_date  |        +----------------+
                           | growth_stage   |
+                          | health         |
+                          | last_cared_for |
                           | owner (FK)     |
                           +----------------+
                                  ^
-                                 |
-                                 |
-                          +----------------+
-                          |  CareAction    |
-                          +----------------+
-                          | id (PK)        |
-                          | plant (FK)     |
-                          | action_type    |
-                          | date           |
-                          | notes          |
-                          +----------------+
+          +----------------------+-------------------+
+          |                      |                   |
++----------------+       +----------------+    +------------------+
+|  CareAction    |       | PlantActivity  |    | Many-to-Many     |
++----------------+       +----------------+    | Plant ↔ Accessory|
+| id (PK)        |       | id (PK)        |    +------------------+
+| plant (FK)     |       | plant (FK)     |
+| action_type    |       | message        |
+| date           |       | timestamp      |
+| notes          |       +----------------+
++----------------+
+
 
 ```
----
+## Deployment
 
+[![VERDANT](/my_app/static/images/logo2.png)](https://verdant-t4w3.onrender.com/)
+https://verdant-t4w3.onrender.com/
+
+
+
+To run Verdant on your local machine, follow these steps:
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/your-username/verdant.git
+cd verdant
+
+pipenv shell
+pipenv install django
+pipenv install psycopg2-binary
+pipenv install django-crontab
+
+CREATE DATABASE verdant;
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py runserver
+
+python manage.py crontab add
 
 ---
 
