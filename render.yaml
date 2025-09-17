@@ -1,7 +1,7 @@
 databases:
   - name: verdant
     plan: free
-    databaseName: Verdant
+    databaseName: verdant
     user: mysite
 
 services:
